@@ -1,0 +1,31 @@
+{{define "web/test01.html"}}//定义模板名称
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+</head>
+<body>
+{{template "web/head.html" .}}
+<h1>123</h1>
+<p>{{.Name}}</p>
+<p>{{.Data}}</p>
+<h1>{{.news.Name}}</h1>
+<h1>{{.news.Data}}</h1>
+{{$t := .Name}}
+<!--变量赋值-->
+<h5>{{$t}}</h5>
+<!--循环遍历-->
+<ul>
+{{range $key,$value:=.habit}}
+<li> {{$key}}->>{{$value}}</li>
+{{end}}
+</ul>
+
+<p>{{.date}}</p>
+<p>{{UnixTime .date}}</p>
+<p>{{stringCat .news.Name .news.Data}}</p>
+</body>
+</html>
+
+{{end }}

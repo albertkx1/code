@@ -1,0 +1,75 @@
+# [Air](https://github.com/cosmtrek/air) 的 TOML 格式配置文件
+
+# 工作目录
+# 可以使用 "." 或绝对路径，但请注意以下目录必须在 root 下。
+root = "."
+tmp_dir = "tmp"
+
+[build]
+# 在每次构建之前运行的命令数组
+pre_cmd = ["echo 'hello air' > pre_cmd.txt"]
+# 普通的 shell 命令。您也可以使用 `make`。
+cmd = "go build -o ./tmp/main ."
+# 在 ^C 后运行的命令数组
+post_cmd = ["echo 'hello air' > post_cmd.txt"]
+# 从 `cmd` 产生的二进制文件。
+bin = "tmp/main"
+# 自定义二进制文件，可以在运行应用程序时设置环境变量。
+full_bin = "APP_ENV=dev APP_USER=air ./tmp/main"
+# 监视这些文件扩展名。
+include_ext = ["go", "tpl", "tmpl", "html"]
+# 忽略这些文件扩展名或目录。
+exclude_dir = ["assets", "tmp", "vendor", "frontend/node_modules"]
+# 如果指定，监视这些目录。
+include_dir = []
+# 监视这些文件。
+include_file = []
+# 排除文件。
+exclude_file = []
+# 排除特定正则表达式。
+exclude_regex = ["_test\\.go"]
+# 排除未更改的文件。
+exclude_unchanged = true
+# 对于目录，跟随符号链接。
+follow_symlink = true
+# 此日志文件位于 tmp_dir 中。
+log = "air.log"
+# 对文件进行轮询以检测更改，而不是使用 fsnotify。
+poll = false
+# 轮询间隔（默认为最小间隔 500 毫秒）。
+poll_interval = 500 # 毫秒
+# 如果文件更改太频繁，无需每次触发构建。
+delay = 0 # 毫秒
+# 在构建错误发生时停止运行旧的二进制文件。
+stop_on_error = true
+# 在终止进程之前发送中断信号（Windows 不支持此功能）。
+send_interrupt = false
+# 发送中断信号后的延迟。
+kill_delay = 500 # 纳秒
+# 是否重新运行二进制文件。
+rerun = false
+# 每次执行之后的延迟。
+rerun_delay = 500
+# 运行二进制文件（bin/full_bin）时添加附加参数。将运行 './tmp/main hello world'。
+args_bin = ["hello", "world"]
+
+[log]
+# 显示日志时间
+time = false
+# 仅显示主日志（禁用监视器、构建和运行器）
+main_only = false
+
+[color]
+# 自定义每个部分的颜色。如果找不到颜色，则使用原始应用程序日志。
+main = "magenta"
+watcher = "cyan"
+build = "yellow"
+runner = "green"
+
+[misc]
+# 在退出时删除 tmp 目录
+clean_on_exit = true
+
+[screen]
+clear_on_rebuild = true
+keep_scroll = true
